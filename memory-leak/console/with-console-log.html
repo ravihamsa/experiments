@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>With Console Log</title>
+</head>
+<body>
+<script type="text/javascript">
+
+    var testFunction = function () {
+
+        var varInClosure = {}
+
+        var ul = document.createElement('ul');
+
+        for (var i = 0; i < 1000; i++) {
+            var li = document.createElement('li');
+            li.innerHTML = 'index' + i;
+            ul.appendChild(li);
+        }
+        document.body.appendChild(ul);
+        varInClosure.ul = ul;
+
+
+        return function () {
+
+            return varInClosure;
+        }
+    }
+
+
+    var clearBodyInnerHTML = function () {
+        document.body.innerHTML = '';
+    }
+
+    var outPut=testFunction();
+
+    console.log(outPut());
+
+    setTimeout(function(){
+        clearBodyInnerHTML();
+        outPut = null;
+    }, 2000)
+
+</script>
+
+</body>
+</html>
